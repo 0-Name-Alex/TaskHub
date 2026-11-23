@@ -1,0 +1,5 @@
+RegisterHotKey
+UnregisterHotKey
+AllowSetForegroundWindow
+SetForegroundWindow
+WM_HOTKEY

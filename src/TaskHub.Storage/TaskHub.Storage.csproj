@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- SQLite via EF Core. Migrations are generated with `dotnet ef` (see build.ps1). -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>TaskHub.Storage</RootNamespace>
+    <!-- Lets `dotnet ef` use this class library as its startup project. -->
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <!-- Generated migration code doesn't follow our analyzer rules. -->
+    <NoWarn>$(NoWarn);CA1062;CA1861;CA1814;IDE0005</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TaskHub.Core\TaskHub.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="TaskHub.Storage.Tests" />
+  </ItemGroup>
+</Project>

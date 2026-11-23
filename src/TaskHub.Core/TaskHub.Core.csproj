@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Domain + engine. No Windows, WPF, ASP.NET or EF dependencies: everything here is testable anywhere. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>TaskHub.Core</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TaskHub.Abstractions\TaskHub.Abstractions.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+    <PackageReference Include="Tomlyn" />
+    <PackageReference Include="Ical.Net" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="TaskHub.Core.Tests" />
+  </ItemGroup>
+</Project>

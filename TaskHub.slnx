@@ -1,0 +1,29 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/TaskHub.Abstractions/TaskHub.Abstractions.csproj" />
+    <Project Path="src/TaskHub.Core/TaskHub.Core.csproj" />
+    <Project Path="src/TaskHub.Storage/TaskHub.Storage.csproj" />
+    <Project Path="src/TaskHub.Api/TaskHub.Api.csproj" />
+    <Project Path="src/TaskHub.Platform.Windows/TaskHub.Platform.Windows.csproj" />
+    <Project Path="src/TaskHub.Notifications/TaskHub.Notifications.csproj" />
+    <Project Path="src/TaskHub.Automation/TaskHub.Automation.csproj" />
+    <Project Path="src/TaskHub.App/TaskHub.App.csproj" />
+    <Project Path="src/TaskHub.Cli/TaskHub.Cli.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/TaskHub.Core.Tests/TaskHub.Core.Tests.csproj" />
+    <Project Path="tests/TaskHub.Storage.Tests/TaskHub.Storage.Tests.csproj" />
+    <Project Path="tests/TaskHub.Api.Tests/TaskHub.Api.Tests.csproj" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
+    <File Path="build.ps1" />
+    <File Path="build.cmd" />
+    <File Path="new-migration.cmd" />
+    <File Path="run-dev.cmd" />
+    <File Path=".config/dotnet-tools.json" />
+    <File Path="README.md" />
+  </Folder>
+</Solution>

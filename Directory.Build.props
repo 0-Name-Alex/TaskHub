@@ -1,0 +1,14 @@
+<Project>
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <Deterministic>true</Deterministic>
+    <Version>0.1.0</Version>
+    <Product>TaskHub</Product>
+    <Company>TaskHub</Company>
+    <!-- CA1515/CA1848 etc. are noisy for an app; keep the rest of the recommended set. -->
+    <NoWarn>$(NoWarn);CA1515;CA1848;CA1727;CA2007;CA1031;CA1303;CA1716;CA1873</NoWarn>
+  </PropertyGroup>
+</Project>
