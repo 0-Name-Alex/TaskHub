@@ -1,4 +1,4 @@
-# ✅ TaskHub
+﻿# ✅ TaskHub
 
 <div align="center">
 
@@ -10,6 +10,8 @@ Built with .NET 10 and WPF. Everything runs on your machine — no account, no c
 [![Language](https://img.shields.io/badge/language-C%23-239120?logo=csharp&logoColor=white)](https://github.com/0-Name-Alex/TaskHub)
 [![License](https://img.shields.io/badge/license-Open%20Source-green)](LICENSE)
 [![MCP](https://img.shields.io/badge/AI-MCP%20Server-blueviolet?logo=anthropic&logoColor=white)](https://modelcontextprotocol.io)
+[![Release](https://img.shields.io/github/v/release/0-Name-Alex/TaskHub?label=release&color=success)](https://github.com/0-Name-Alex/TaskHub/releases/latest)
+[![Download](https://img.shields.io/github/downloads/0-Name-Alex/TaskHub/total?color=blue&label=downloads)](https://github.com/0-Name-Alex/TaskHub/releases/latest)
 
 </div>
 
@@ -68,6 +70,17 @@ winget install Microsoft.DotNet.SDK.10
 ---
 
 ## 🏁 Getting Started
+
+### ⚡ Quick Install (No SDK required)
+
+1. Download [**TaskHub-v1.0.0-win-x64.zip**](https://github.com/0-Name-Alex/TaskHub/releases/latest) from the latest release.
+2. Extract the ZIP anywhere on your PC.
+3. Double-click **TaskHub.exe** — the app immediately launches into your system tray!
+*(Optional: keep `th.exe` in your PATH if you want to use the CLI or Claude MCP integration).*
+
+---
+
+### 🛠️ Build from Source (For developers)
 
 ### 1️⃣ Clone and build
 
