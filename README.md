@@ -1,4 +1,4 @@
-# TaskHub
+﻿# TaskHub
 
 Local-first to-do, reminder and laptop automation hub for Windows (.NET 10, WPF).
 Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). Hands-on checks to do after a build: [docs/CHECKS.md](docs/CHECKS.md).
@@ -7,13 +7,26 @@ Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). Hands-on checks to d
 
 | Phase | State |
 |---|---|
-| 0 – App shell (host, single instance, tray, config, logging, event bus, autostart, hotkeys) | ✅ |
-| 1 – Core + storage (tasks, SQLite, undo, search, import/export, local API slice, CLI, task UI) | ✅ |
-| 2 – Reminders, recurrence, snooze, missed-reminder catch-up, daily backup | ✅ |
-| 3 – Custom notification banners (acrylic, animations, stacking, theming, reply, DND, history, presets) | ✅ |
-| 4 – Automation (rules, reminder actions, clipboard/screenshot capture, launcher, file watcher, system triggers) | ✅ |
-| 5 – Live events over WebSocket, MCP server for AI assistants (`th mcp`) | ✅ |
-| 6 – Phone reminders (Telegram/ntfy), calendar, local AI, voice; plugins later | next |
+| 0 - App shell (host, single instance, tray, config, logging, event bus, autostart, hotkeys) | Done |
+| 1 - Core + storage (tasks, SQLite, undo, search, import/export, local API slice, CLI, task UI) | Done |
+| 2 - Reminders, recurrence, snooze, missed-reminder catch-up, daily backup | Done |
+| 3 - Custom notification banners (acrylic, animations, stacking, theming, reply, DND, history, presets) | Done |
+| 4 - Automation (rules, reminder actions, clipboard/screenshot capture, launcher, file watcher, system triggers) | Done |
+| 5 - Live events over WebSocket, MCP server for AI assistants (`th mcp`) | Done |
+| 6 - Phone reminders (Telegram/ntfy), calendar, local AI, voice; plugins later | Future |
+
+## Future Updates
+
+The core app is **complete** (Phases 0–5). The following features are planned for future releases:
+
+| Feature | Description |
+|---|---|
+| **Local AI (Ollama)** | On-device LLM integration via `IAiProvider` - natural-language task management without sending data to the cloud |
+| **Voice input (Whisper)** | Speak to add tasks - local speech-to-text using OpenAI Whisper (runs offline) |
+| **Phone reminders (Telegram / ntfy)** | Push reminders to your phone even when the laptop is closed |
+| **Calendar integration** | Two-way sync with Google Calendar / iCal - see tasks alongside calendar events |
+| **Plugin system** | In-process (.NET `AssemblyLoadContext`) and out-of-process (Python, Node, etc.) plugins |
+| **Greeter app** | A companion window that appears on sign-in, unlock, and resume - shows today's tasks, overdue items, quick-add, and next reminder. See [docs/GREETER_PROMPT.md](docs/GREETER_PROMPT.md) for the full spec. |
 
 ## Requirements
 
