@@ -38,6 +38,13 @@ internal sealed class TrayIconService(AppPaths paths, ConfigStore config, IAutos
         menu.Items.Add(new Separator());
         menu.Items.Add(_dndItem);
         menu.Items.Add(_autostartItem);
+        menu.Items.Add(Item("Trim memory", () =>
+        {
+            var before = TaskHub.Platform.Windows.Memory.MemoryOptimizer.GetCurrentMemoryMb();
+            TaskHub.Platform.Windows.Memory.MemoryOptimizer.TrimWorkingSet();
+            var after = TaskHub.Platform.Windows.Memory.MemoryOptimizer.GetCurrentMemoryMb();
+            Log.Information("Manual memory trim: {Before:F1} MB -> {After:F1} MB", before, after);
+        }));
         menu.Items.Add(Item("Edit config file", () => OpenPath(config.FilePath)));
         menu.Items.Add(Item("Open logs folder", () => OpenPath(paths.LogsDir)));
         menu.Items.Add(new Separator());

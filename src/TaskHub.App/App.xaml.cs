@@ -70,6 +70,15 @@ public partial class App : Application
             var config = Services.GetRequiredService<ConfigStore>().Current;
             if (!_startup.Background && config.General.ShowMainWindowOnLaunch)
                 ShowMainWindow();
+            else
+                TaskHub.Platform.Windows.Memory.MemoryOptimizer.TrimWorkingSet();
+
+            // Run a background trim 3 seconds after startup to reclaim all temporary JIT/XAML allocations
+            _ = Task.Run(async () =>
+            {
+                await Task.Delay(3000);
+                TaskHub.Platform.Windows.Memory.MemoryOptimizer.TrimWorkingSet();
+            });
 
             Log.Information("TaskHub is running");
         }
@@ -233,7 +242,11 @@ public partial class App : Application
     public void ToggleMainWindow()
     {
         var window = Services.GetRequiredService<MainWindow>();
-        if (window.IsVisible && window.IsActive) window.Hide();
+        if (window.IsVisible && window.IsActive)
+        {
+            window.Hide();
+            TaskHub.Platform.Windows.Memory.MemoryOptimizer.TrimWorkingSet();
+        }
         else ShowMainWindow();
     }
 

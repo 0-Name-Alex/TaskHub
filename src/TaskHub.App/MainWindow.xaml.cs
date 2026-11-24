@@ -221,6 +221,17 @@ public partial class MainWindow : Window
             ? System.Windows.Media.VisualTreeHelper.GetParent(d) ?? LogicalTreeHelper.GetParent(d)
             : LogicalTreeHelper.GetParent(d);
 
+    /// <summary>Minimizing to tray flushes working set memory.</summary>
+    protected override void OnStateChanged(EventArgs e)
+    {
+        base.OnStateChanged(e);
+        if (WindowState == WindowState.Minimized)
+        {
+            Hide();
+            TaskHub.Platform.Windows.Memory.MemoryOptimizer.TrimWorkingSet();
+        }
+    }
+
     /// <summary>Closing the window hides it to the tray; only Quit exits the app.</summary>
     protected override void OnClosing(CancelEventArgs e)
     {
@@ -228,6 +239,7 @@ public partial class MainWindow : Window
         {
             e.Cancel = true;
             Hide();
+            TaskHub.Platform.Windows.Memory.MemoryOptimizer.TrimWorkingSet();
         }
         base.OnClosing(e);
     }

@@ -8,6 +8,9 @@
     <StartupObject>TaskHub.App.Program</StartupObject>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Assets\TaskHub.ico</ApplicationIcon>
+    <!-- Memory Optimization: Use Workstation GC to eliminate multi-core server heap bloat -->
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+    <ConcurrentGarbageCollection>true</ConcurrentGarbageCollection>
     <!-- WPF0001: Fluent ThemeMode is marked experimental. -->
     <NoWarn>$(NoWarn);WPF0001</NoWarn>
   </PropertyGroup>
