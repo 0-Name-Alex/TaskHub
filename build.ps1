@@ -53,13 +53,23 @@ if ($addedMigration) {
 Step 'test'    { dotnet test TaskHub.slnx -c Debug --no-build -v:minimal --logger "console;verbosity=normal" }
 
 if ($Publish) {
-    Step 'publish' {
+    Step 'publish (standalone)' {
         dotnet publish src/TaskHub.App/TaskHub.App.csproj -c Release -r win-x64 --self-contained `
             -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o artifacts/TaskHub
-    }
-    Step 'publish cli' {
+        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
         dotnet publish src/TaskHub.Cli/TaskHub.Cli.csproj -c Release -r win-x64 --self-contained `
             -p:PublishSingleFile=true -o artifacts/TaskHub
+    }
+    Step 'publish (lite without .NET runtime)' {
+        if (Test-Path artifacts/TaskHub-lite) { Remove-Item artifacts/TaskHub-lite -Recurse -Force }
+        dotnet publish src/TaskHub.App/TaskHub.App.csproj -c Release -r win-x64 --no-self-contained `
+            -p:DebugType=none -p:DebugSymbols=false -o artifacts/TaskHub-lite
+        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+        dotnet publish src/TaskHub.Cli/TaskHub.Cli.csproj -c Release -r win-x64 --no-self-contained `
+            -p:DebugType=none -p:DebugSymbols=false -o artifacts/TaskHub-lite
+        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+        New-Item -ItemType Directory -Path release -Force | Out-Null
+        Compress-Archive -Path artifacts/TaskHub-lite/* -DestinationPath release/TaskHub-win-x64-net10-lite.zip -Force
     }
 }
 

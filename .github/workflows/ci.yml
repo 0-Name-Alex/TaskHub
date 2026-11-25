@@ -33,26 +33,36 @@ jobs:
       - name: Run test suite
         run: dotnet test TaskHub.slnx -c Release --no-build --logger "trx;LogFileName=test-results.trx"
 
-      - name: Publish self-contained binaries
+      - name: Publish standalone & lite bundles
         if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
         shell: pwsh
         run: |
+          $tag = if ($env:GITHUB_REF_NAME -match '^v') { $env:GITHUB_REF_NAME } else { 'v1.0.1' }
+
+          # 1. Self-contained single-file (zero .NET prerequisites)
           dotnet publish src/TaskHub.App/TaskHub.App.csproj -c Release -r win-x64 --self-contained `
             -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o artifacts/TaskHub
           dotnet publish src/TaskHub.Cli/TaskHub.Cli.csproj -c Release -r win-x64 --self-contained `
             -p:PublishSingleFile=true -o artifacts/TaskHub
-          Compress-Archive -Path artifacts/TaskHub/* -DestinationPath "TaskHub-win-x64.zip" -Force
+          Compress-Archive -Path artifacts/TaskHub/* -DestinationPath "TaskHub-$tag-win-x64-standalone.zip" -Force
+
+          # 2. Framework-dependent lite bundle (without .NET runtime)
+          dotnet publish src/TaskHub.App/TaskHub.App.csproj -c Release -r win-x64 --no-self-contained `
+            -p:DebugType=none -p:DebugSymbols=false -o artifacts/TaskHub-lite
+          dotnet publish src/TaskHub.Cli/TaskHub.Cli.csproj -c Release -r win-x64 --no-self-contained `
+            -p:DebugType=none -p:DebugSymbols=false -o artifacts/TaskHub-lite
+          Compress-Archive -Path artifacts/TaskHub-lite/* -DestinationPath "TaskHub-$tag-win-x64-net10-lite.zip" -Force
 
       - name: Upload build artifact
         if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
         uses: actions/upload-artifact@v4
         with:
           name: TaskHub-win-x64
-          path: TaskHub-win-x64.zip
+          path: TaskHub-*-win-x64-*.zip
 
       - name: Create GitHub Release
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
-          files: TaskHub-win-x64.zip
+          files: TaskHub-*-win-x64-*.zip
           generate_release_notes: true
