@@ -71,11 +71,22 @@ winget install Microsoft.DotNet.SDK.10
 
 ## 🏁 Getting Started
 
-### ⚡ Quick Install (No SDK required)
+### ⚡ Option A: Standalone Release (No .NET Install Required)
 
-1. Download [**TaskHub-v1.0.0-win-x64.zip**](https://github.com/0-Name-Alex/TaskHub/releases/latest) from the latest release.
+1. Download **`TaskHub-<version>-win-x64-standalone.zip`** from [**GitHub Releases**](https://github.com/0-Name-Alex/TaskHub/releases/latest).
 2. Extract the ZIP anywhere on your PC.
 3. Double-click **TaskHub.exe** — the app immediately launches into your system tray!
+
+### 🪶 Option B: Lightweight ZIP (Without .NET Bundled, ~6.3 MB)
+
+A compressed framework-dependent build is checked directly into the repository at [`release/TaskHub-win-x64-net10-lite.zip`](release/TaskHub-win-x64-net10-lite.zip) (and attached to GitHub Releases). It requires **.NET 10 Desktop + ASP.NET Core Runtimes** (or the .NET 10 SDK):
+
+```powershell
+winget install Microsoft.DotNet.DesktopRuntime.10
+winget install Microsoft.DotNet.AspNetCore.10
+```
+
+Extract [`release/TaskHub-win-x64-net10-lite.zip`](release/TaskHub-win-x64-net10-lite.zip) and run `TaskHub.exe`.
 *(Optional: keep `th.exe` in your PATH if you want to use the CLI or Claude MCP integration).*
 
 ---
